@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardChart from "../components/DashboardChart";
 import Navbar from "../components/Navbar";
 
@@ -11,6 +11,11 @@ export default function TrendsPage() {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
+  // Fetch tickets from public folder
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) setUser(JSON.parse(savedUser));
+  }, []);
   // Example datasets
   const salesData = [
     { month: "Jan", value: 4000 },

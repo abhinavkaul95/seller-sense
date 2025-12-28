@@ -22,6 +22,36 @@ export default function Navbar({ user }) {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState();
 
+  /* ---------------- NAV ITEMS ---------------- */
+
+  const NAV_ITEMS = [
+    {
+      label: "Trends",
+      href: "/trends",
+      icon: TrendingUp,
+    },
+    {
+      label: "Inventory",
+      href: "/inventory",
+      icon: Boxes,
+    },
+    {
+      label: "Returns & Refunds",
+      href: "/returns",
+      icon: RotateCcw,
+    },
+    {
+      label: "Support",
+      href: "/support",
+      icon: Star,
+    },
+    {
+      label: "Alerts",
+      href: "/alerts",
+      icon: Bell,
+    },
+  ];
+
   // Fetch notifications
   useEffect(() => {
     fetch("/dummy/notifications.json")
@@ -223,38 +253,3 @@ function MenuItem({ icon: Icon, label, danger }) {
     </div>
   );
 }
-
-/* ---------------- NAV ITEMS ---------------- */
-
-const NAV_ITEMS = [
-  {
-    label: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutGrid,
-  },
-  {
-    label: "Inventory",
-    href: "/inventory",
-    icon: Boxes,
-  },
-  {
-    label: "Returns & Refunds",
-    href: "/returns",
-    icon: RotateCcw,
-  },
-  {
-    label: "Support",
-    href: "/support",
-    icon: Star,
-  },
-  {
-    label: "Alerts",
-    href: "/alerts",
-    icon: Bell,
-  },
-  {
-    label: "Trends",
-    href: "/trends",
-    icon: TrendingUp,
-  },
-];

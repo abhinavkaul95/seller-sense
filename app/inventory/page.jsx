@@ -23,6 +23,9 @@ export default function InventoryPage() {
         console.error(err);
         setLoading(false);
       });
+
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) setUser(JSON.parse(savedUser));
   }, []);
 
   // Load user from localStorage

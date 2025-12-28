@@ -38,10 +38,7 @@ export default function SupportPage() {
         console.error(err);
         setLoading(false);
       });
-  }, []);
 
-  // Load user from localStorage
-  useEffect(() => {
     const savedUser = localStorage.getItem("user");
     if (savedUser) setUser(JSON.parse(savedUser));
   }, []);
