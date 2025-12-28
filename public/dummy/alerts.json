@@ -1,0 +1,18 @@
+[
+  {
+    "severity": "CRITICAL",
+    "category": "inventory",
+    "timestamp": "Dec 28, 2025 22:56",
+    "title": "Inventory CRITICAL: Wireless Charger",
+    "summary": "Only 35 units left, 1.9 days remaining",
+    "details": "Inventory Alert – CRITICAL for Wireless Charger (SKU-CHG-006): With 35 units on hand and a daily velocity of 18.7, stock will be depleted in about 2 days. Expedite an immediate replenishment order and consider temporarily throttling promotions or prioritizing key sales channels to prevent stockouts."
+  },
+  {
+    "severity": "CRITICAL",
+    "category": "inventory",
+    "timestamp": "Dec 28, 2025 22:56",
+    "title": "Inventory CRITICAL: Smart Watch Band",
+    "summary": "Only 18 units left, 1.2 days remaining",
+    "details": "Inventory Alert – CRITICAL Smart Watch Band (SKU-WCH-003) is at 18 units with only ~1.2 days of stock remaining at the current sell-through rate (15.2 units/day). Expedite an immediate replenishment PO and, if lead times are >1 day, consider temporarily throttling promotions or reallocating remaining units across key channels to minimize stockout impact."
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "sales": [
+    { "date": "Dec 22", "sales": 1200 },
+    { "date": "Dec 23", "sales": 1500 },
+    { "date": "Dec 24", "sales": 1100 }
+  ],
+  "topProducts": [
+    { "product": "Wireless Charger", "unitsSold": 320 },
+    { "product": "Smart Watch Band", "unitsSold": 210 }
+  ],
+  "revenueByCategory": [
+    { "category": "Electronics", "revenue": 5000 },
+    { "category": "Accessories", "revenue": 3000 }
+  ],
+  "refunds": [
+    { "date": "Dec 22", "count": 5 },
+    { "date": "Dec 23", "count": 2 }
+  ],
+  "inventoryVelocity": [
+    { "date": "Dec 22", "velocity": 18 },
+    { "date": "Dec 23", "velocity": 20 }
+  ]
+}

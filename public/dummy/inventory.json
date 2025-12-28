@@ -1,0 +1,34 @@
+[
+  {
+    "product": "Wireless Earbuds Pro",
+    "sku": "WEB-1021",
+    "stock": 124,
+    "velocity": 18,
+    "status": "Healthy",
+    "aiInsight": "Stock level is optimal based on current sales velocity."
+  },
+  {
+    "product": "Smart Fitness Watch",
+    "sku": "SFW-8832",
+    "stock": 22,
+    "velocity": 12,
+    "status": "Low Stock",
+    "aiInsight": "Reorder suggested within 3 days to avoid stockout."
+  },
+  {
+    "product": "USB-C Fast Charger",
+    "sku": "UCFC-5544",
+    "stock": 0,
+    "velocity": 9,
+    "status": "Out of Stock",
+    "aiInsight": "Product is out of stock. Sales opportunity lost."
+  },
+  {
+    "product": "Bluetooth Speaker Mini",
+    "sku": "BSM-7712",
+    "stock": 310,
+    "velocity": 6,
+    "status": "Overstocked",
+    "aiInsight": "Consider promotions to reduce excess inventory."
+  }
+]

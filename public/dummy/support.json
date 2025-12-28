@@ -1,0 +1,24 @@
+[
+  {
+    "ticketId": "TKTFD2D0E40",
+    "priority": "LOW PRIORITY",
+    "ltv": 750,
+    "subject": "Return process question",
+    "customer": "Chris Taylor",
+    "email": "c.taylor@example.com",
+    "date": "Dec 14, 2025",
+    "message": "How do I return an item I'm not satisfied with?",
+    "aiDraft": "Thank you for reaching out. We're reviewing your request about 'Return process question' and will get back to you shortly."
+  },
+  {
+    "ticketId": "TKTE83D39D4",
+    "priority": "HIGH PRIORITY",
+    "ltv": 12000,
+    "subject": "Bulk order pricing",
+    "customer": "Rachel Kim",
+    "email": "rachel.k@example.com",
+    "date": "Dec 14, 2025",
+    "message": "I'd like to place a bulk order for 100 units. Can we discuss pricing?",
+    "aiDraft": "Hi Rachel, thanks so much for reaching out and for being such a valued long-term customer with us. We’d be happy to discuss special pricing for a 100-unit order..."
+  }
+]

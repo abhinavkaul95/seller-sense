@@ -1,0 +1,22 @@
+[
+  {
+    "refundId": "RFDD70C422B",
+    "risk": "LOW RISK",
+    "reason": "Changed mind",
+    "customer": "David Brown",
+    "email": "dbrown@example.com",
+    "amount": 388.81,
+    "date": "Dec 14, 2025",
+    "aiInsight": "Single occurrence of 'Changed mind'. Monitoring for patterns."
+  },
+  {
+    "refundId": "RFD5D55388D",
+    "risk": "MEDIUM RISK",
+    "reason": "Wrong item received",
+    "customer": "David Brown",
+    "email": "dbrown@example.com",
+    "amount": 336.79,
+    "date": "Dec 14, 2025",
+    "aiInsight": "Two recent “wrong item received” refunds totaling $336.79 from the same customer suggest a potential pick/pack or SKU labeling issue. Review order history, inspect associated SKUs, audit shipments, and proactively reach out to the customer."
+  }
+]

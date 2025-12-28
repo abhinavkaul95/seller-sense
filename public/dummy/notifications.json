@@ -1,0 +1,12 @@
+[
+  {
+    "type": "critical",
+    "time": "Dec 28, 2025 22:56",
+    "message": "Inventory CRITICAL: Wireless Charger - Only 35 units left"
+  },
+  {
+    "type": "info",
+    "time": "Dec 28, 2025 21:10",
+    "message": "New support ticket from Chris Taylor"
+  }
+]
