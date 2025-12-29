@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Popover, Divider } from "antd";
+import { Popover, Divider, Button } from "antd";
 import {
   LayoutGrid,
   Boxes,
@@ -12,9 +12,12 @@ import {
   LogOut,
   User,
   Settings,
+  LogIn,
+  UserPlus,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Navbar({ user }) {
   const { resolvedTheme, setTheme } = useTheme();
@@ -71,20 +74,17 @@ export default function Navbar({ user }) {
         isDark ? "bg-[#0B0F1A] border-white/10" : "bg-white border-gray-200"
       }`}
     >
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto px-6">
         <div className="flex h-16 items-center justify-between">
           {/* Brand */}
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold">
-              SS
-            </div>
-            <span
-              className={`text-lg font-extrabold tracking-tight ${
-                isDark ? "text-white" : "text-gray-900"
-              }`}
-            >
-              Seller Sense
-            </span>
+            <Link href="/">
+              <img
+                style={{ width: 250, marginTop: 15 }}
+                src="/logo.png"
+                alt="logo"
+              />
+            </Link>
           </div>
 
           {/* Navigation */}
@@ -118,62 +118,19 @@ export default function Navbar({ user }) {
             >
               {isDark ? "🌙" : "☀️"}
             </button>
-            <Popover
-              placement="bottom"
-              trigger="hover"
-              content={
-                <div
-                  className={`w-80 max-h-96 overflow-y-auto ${
-                    isDark
-                      ? "bg-[#0F1424] text-gray-200"
-                      : "bg-white text-gray-800"
-                  } rounded-xl p-2 shadow-lg`}
-                >
-                  {loading ? (
-                    <div className="flex justify-center py-4">
-                      <Spin />
-                    </div>
-                  ) : notifications.length === 0 ? (
-                    <div className="text-center py-4 text-gray-400">
-                      No notifications
-                    </div>
-                  ) : (
-                    notifications.map((notif, idx) => (
-                      <div
-                        key={idx}
-                        className="p-2 rounded hover:bg-indigo-600/10 transition cursor-pointer"
-                      >
-                        <div className="flex justify-between items-center text-sm font-medium">
-                          <span className="capitalize">{notif.type}</span>
-                          <span className="text-xs text-gray-400">
-                            {notif.time}
-                          </span>
-                        </div>
-                        <div className="mt-1 text-sm">{notif.message}</div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              }
-              styles={{
-                container: {
-                  padding: 0,
-                  backgroundColor: isDark ? "#0F1424" : "#FFFFFF",
-                  borderRadius: 12,
-                  border: isDark
-                    ? "1px solid rgba(255,255,255,0.08)"
-                    : "1px solid #E5E7EB",
-                },
-              }}
-            >
-              <Bell
-                className={`h-5 w-5 cursor-pointer ${
-                  isDark ? "text-gray-400 hover:text-white" : "text-gray-500"
-                }`}
-              />
-            </Popover>
 
-            <ProfilePopover user={user} isDark={isDark} />
+            {user ? (
+              <>
+                <NotificationPopover
+                  notifications={notifications}
+                  loading={loading}
+                  isDark={isDark}
+                />
+                <ProfilePopover user={user} isDark={isDark} />
+              </>
+            ) : (
+              <GuestMenu isDark={isDark} />
+            )}
           </div>
         </div>
       </div>
@@ -215,14 +172,102 @@ function ProfilePopover({ user, isDark }) {
     </Popover>
   );
 }
+function NotificationPopover({ notifications, loading, isDark }) {
+  return (
+    <Popover
+      placement="bottom"
+      trigger="hover"
+      content={
+        <div
+          className={`w-80 max-h-96 overflow-y-auto ${
+            isDark ? "bg-[#0F1424] text-gray-200" : "bg-white text-gray-800"
+          } rounded-xl p-2 shadow-lg`}
+        >
+          {loading ? (
+            <div className="flex justify-center py-4">
+              <Spin />
+            </div>
+          ) : notifications.length === 0 ? (
+            <div className="text-center py-4 text-gray-400">
+              No notifications
+            </div>
+          ) : (
+            notifications.map((notif, idx) => (
+              <div
+                key={idx}
+                className="p-2 rounded hover:bg-indigo-600/10 transition cursor-pointer"
+              >
+                <div className="flex justify-between items-center text-sm font-medium">
+                  <span className="capitalize">{notif.type}</span>
+                  <span className="text-xs text-gray-400">{notif.time}</span>
+                </div>
+                <div className="mt-1 text-sm">{notif.message}</div>
+              </div>
+            ))
+          )}
+        </div>
+      }
+      styles={{
+        container: {
+          padding: 0,
+          backgroundColor: isDark ? "#0F1424" : "#FFFFFF",
+          borderRadius: 12,
+          border: isDark
+            ? "1px solid rgba(255,255,255,0.08)"
+            : "1px solid #E5E7EB",
+        },
+      }}
+    >
+      <Bell
+        className={`h-5 w-5 cursor-pointer ${
+          isDark ? "text-gray-400 hover:text-white" : "text-gray-500"
+        }`}
+      />
+    </Popover>
+  );
+}
+function MenuItem({ icon: Icon, label, onClick, danger, isDark }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`w-full flex items-center gap-2 px-4 py-2 text-sm rounded-md transition text-left cursor-pointer
+        ${
+          danger
+            ? "text-red-400 hover:bg-red-500/10"
+            : isDark
+            ? "hover:bg-white/5"
+            : "hover:bg-gray-100"
+        }
+      `}
+    >
+      <Icon className="h-4 w-4" />
+      {label}
+    </button>
+  );
+}
 
 function ProfileMenu({ user, isDark }) {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Clear storage
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Redirect to homepage
+    window.location.href = "/";
+
+    // router.replace("/");
+    // router.refresh();
+  };
+
   return (
     <div
       className={`w-56 rounded-lg ${
         isDark ? "bg-[#0F1424] text-gray-200" : "bg-white text-gray-800"
       }`}
     >
+      {/* User Info */}
       <div className="px-4 py-3">
         <div className="text-sm font-semibold">{user?.name || "Seller"}</div>
         <div className="text-xs text-gray-400">{user?.email}</div>
@@ -230,26 +275,58 @@ function ProfileMenu({ user, isDark }) {
 
       <Divider className="my-1" />
 
-      <MenuItem icon={User} label="My Profile" />
-      <MenuItem icon={Settings} label="Account Settings" />
-      <MenuItem icon={TrendingUp} label="Billing & Usage" />
+      {/* Navigation */}
+      <MenuItem
+        icon={User}
+        label="My Profile"
+        onClick={() => router.push("/profile")}
+        isDark={isDark}
+      />
+      <MenuItem
+        icon={Settings}
+        label="Account Settings"
+        onClick={() => router.push("/settings")}
+        isDark={isDark}
+      />
+      <MenuItem
+        icon={TrendingUp}
+        label="Billing & Usage"
+        onClick={() => router.push("/billing")}
+        isDark={isDark}
+      />
 
       <Divider className="my-1" />
 
-      <MenuItem icon={LogOut} label="Logout" danger />
+      {/* Logout */}
+      <MenuItem
+        icon={LogOut}
+        label="Logout"
+        danger
+        onClick={handleLogout}
+        isDark={isDark}
+      />
     </div>
   );
 }
 
-function MenuItem({ icon: Icon, label, danger }) {
+function GuestMenu({ isDark }) {
   return (
-    <div
-      className={`flex items-center gap-2 px-4 py-2 text-sm cursor-pointer rounded-md transition ${
-        danger ? "text-red-400 hover:bg-red-500/10" : "hover:bg-white/5"
-      }`}
-    >
-      <Icon className="h-4 w-4" />
-      {label}
+    <div className="space-y-2 gap-2 flex flex-row">
+      <Link href="/signin" className="m-0">
+        <Button
+          block
+          icon={<LogIn className="h-4 w-4" />}
+          className="flex items-center justify-center"
+        >
+          Login
+        </Button>
+      </Link>
+
+      <Link href="/signup" className="m-0">
+        <Button block type="primary" icon={<UserPlus className="h-4 w-4" />}>
+          Create Account
+        </Button>
+      </Link>
     </div>
   );
 }

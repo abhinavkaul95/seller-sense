@@ -128,6 +128,9 @@ function Hero() {
 }
 
 function Features() {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
   const items = [
     {
       icon: BarChart3,
@@ -152,23 +155,63 @@ function Features() {
   ];
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-24">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-14 text-gray-900">
-        Built for serious e-commerce growth
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {items.map((f, i) => (
-          <div
-            key={i}
-            className="rounded-2xl bg-white shadow-lg p-6 hover:shadow-xl transition"
-          >
-            <f.icon className="h-10 w-10 text-indigo-600 mb-4" />
-            <h3 className="font-semibold text-lg mb-2 text-gray-900">
-              {f.title}
-            </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">{f.desc}</p>
-          </div>
-        ))}
+    <section
+      className={`py-24 ${isDark ? "bg-[#0B0F1A]" : "bg-gray-50"}`}
+      style={{ width: "100%" }}
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Heading */}
+        <h2
+          className={`text-3xl md:text-4xl font-bold text-center mb-14 ${
+            isDark ? "text-white" : "text-gray-900"
+          }`}
+        >
+          Built for serious e-commerce growth
+        </h2>
+
+        {/* Feature Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {items.map((f, i) => (
+            <div
+              key={i}
+              className={`rounded-2xl p-6 transition-all
+                ${
+                  isDark
+                    ? "bg-[#12172A] border border-white/10 hover:border-indigo-500/40 hover:shadow-[0_0_0_1px_rgba(99,102,241,0.3)]"
+                    : "bg-white shadow-md hover:shadow-xl"
+                }
+              `}
+            >
+              <div
+                className={`h-12 w-12 flex items-center justify-center rounded-xl mb-4
+                  ${
+                    isDark
+                      ? "bg-indigo-500/10 text-indigo-400"
+                      : "bg-indigo-100 text-indigo-600"
+                  }
+                `}
+              >
+                <f.icon className="h-6 w-6" />
+              </div>
+
+              <h3
+                className={`font-semibold text-lg mb-2 ${
+                  isDark ? "text-white" : "text-gray-900"
+                }`}
+              >
+                {f.title}
+              </h3>
+
+              <p
+                className={`text-sm leading-relaxed ${
+                  isDark ? "text-gray-400" : "text-gray-600"
+                }`}
+              >
+                {f.desc}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -596,7 +639,7 @@ export default function Home() {
         setTheme={setTheme}
       />
       {!user ? (
-        <div className="flex flex-col items-center justify-center px-2">
+        <>
           <Hero onSigninClick={handleShowSignin} />
           <Features />
           {showAuth && (
@@ -606,11 +649,11 @@ export default function Home() {
               setShowSignup={setShowSignup}
             />
           )}
-        </div>
+          <Footer />
+        </>
       ) : (
         <Welcome user={user} />
       )}
-      <Footer />
     </div>
   );
 }

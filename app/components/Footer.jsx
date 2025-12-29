@@ -1,111 +1,125 @@
+"use client";
+
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 export default function Footer() {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
   return (
-    <footer className="bg-gray-950 text-gray-400">
+    <footer
+      className={`border-t ${
+        isDark
+          ? "bg-[#0B0F1A] border-white/10 text-gray-400"
+          : "bg-gray-50 border-gray-200 text-gray-600"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div>
-            <h3 className="text-xl font-extrabold text-white mb-3">
+            <h3
+              className={`text-xl font-extrabold mb-3 ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
               Seller Sense
             </h3>
-            <p className="text-sm text-gray-400 max-w-xs leading-relaxed">
+            <p
+              className={`text-sm max-w-xs leading-relaxed ${
+                isDark ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
               AI-powered intelligence for modern e-commerce sellers across
               Amazon, eBay, and beyond.
             </p>
           </div>
 
           {/* Product */}
-          <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Product</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="#features" className="hover:text-white transition">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link href="/pricing" className="hover:text-white transition">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/integrations"
-                  className="hover:text-white transition"
-                >
-                  Integrations
-                </Link>
-              </li>
-              <li>
-                <Link href="/roadmap" className="hover:text-white transition">
-                  Roadmap
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <FooterColumn
+            title="Product"
+            isDark={isDark}
+            links={[
+              { label: "Features", href: "#features" },
+              { label: "Pricing", href: "/pricing" },
+              { label: "Integrations", href: "/integrations" },
+              { label: "Roadmap", href: "/roadmap" },
+            ]}
+          />
 
           {/* Company */}
-          <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Company</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/about" className="hover:text-white transition">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-white transition">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className="hover:text-white transition">
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <FooterColumn
+            title="Company"
+            isDark={isDark}
+            links={[
+              { label: "About", href: "/about" },
+              { label: "Blog", href: "/blog" },
+              { label: "Careers", href: "/careers" },
+              { label: "Contact", href: "/contact" },
+            ]}
+          />
 
           {/* Legal */}
-          <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Legal</h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <Link href="/privacy" className="hover:text-white transition">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-white transition">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link href="/security" className="hover:text-white transition">
-                  Security
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <FooterColumn
+            title="Legal"
+            isDark={isDark}
+            links={[
+              { label: "Privacy Policy", href: "/privacy" },
+              { label: "Terms of Service", href: "/terms" },
+              { label: "Security", href: "/security" },
+            ]}
+          />
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between text-sm">
+        <div
+          className={`mt-12 pt-6 border-t flex flex-col md:flex-row items-center justify-between text-sm ${
+            isDark ? "border-white/10" : "border-gray-200"
+          }`}
+        >
           <span>
             © {new Date().getFullYear()} Seller Sense. All rights reserved.
           </span>
-          <span className="mt-4 md:mt-0 text-gray-500">
+          <span
+            className={`mt-4 md:mt-0 ${
+              isDark ? "text-gray-500" : "text-gray-500"
+            }`}
+          >
             Built with ❤️ for e-commerce sellers
           </span>
         </div>
       </div>
     </footer>
+  );
+}
+
+/* ---------------- FOOTER COLUMN ---------------- */
+
+function FooterColumn({ title, links, isDark }) {
+  return (
+    <div>
+      <h4
+        className={`text-sm font-semibold mb-4 ${
+          isDark ? "text-white" : "text-gray-900"
+        }`}
+      >
+        {title}
+      </h4>
+      <ul className="space-y-3 text-sm">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link
+              href={link.href}
+              className={`transition ${
+                isDark ? "hover:text-white" : "hover:text-gray-900"
+              }`}
+            >
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

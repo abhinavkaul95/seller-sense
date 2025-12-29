@@ -18,7 +18,7 @@ export default function SignupPage() {
     try {
       const res = await axios.post("/api/auth/signup", form);
       localStorage.setItem("token", res.data.token);
-      router.push("/dashboard");
+      router.push("/");
     } catch {
       setError("Signup failed");
     }

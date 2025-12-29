@@ -19,7 +19,7 @@ export default function LoginPage() {
       const res = await axios.post("/api/auth/signin", form);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      router.push("/dashboard");
+      router.push("/");
     } catch {
       setError("Invalid email or password");
     }
