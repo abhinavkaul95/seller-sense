@@ -50,7 +50,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const theme = process.env.NEXT_PUBLIC_DEFAULT_THEME || "dark";
+  const theme = process.env.NEXT_PUBLIC_DEFAULT_THEME || "light";
   return (
     <html lang="en" suppressHydrationWarning>
       <head>

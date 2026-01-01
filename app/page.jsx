@@ -10,7 +10,7 @@ import {
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-import { Card, Row, Col, Typography, Statistic } from "antd";
+import { Card, Row, Col, Typography, Statistic, Spin } from "antd";
 import {
   LineChart,
   Line,
@@ -583,8 +583,9 @@ export default function Home() {
   const [showSignup, setShowSignup] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
   const [theme, setTheme] = useState(getInitialTheme());
-
+  const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
+    setIsMounted(true);
     const savedUser = localStorage.getItem("user");
     if (savedUser) setUser(JSON.parse(savedUser));
   }, []);
@@ -620,6 +621,13 @@ export default function Home() {
     setShowAuth(true);
     setShowSignup(true);
   };
+  if (!isMounted) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Spin size="large" />
+      </div>
+    );
+  }
 
   return (
     <div

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import DashboardChart from "../components/DashboardChart";
 import Navbar from "../components/Navbar";
 
+import { Spin } from "antd";
 export default function TrendsPage() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +16,9 @@ export default function TrendsPage() {
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     if (savedUser) setUser(JSON.parse(savedUser));
+    setLoading(false);
   }, []);
+
   // Example datasets
   const salesData = [
     { month: "Jan", value: 4000 },
@@ -196,6 +199,16 @@ export default function TrendsPage() {
 
   const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#00c49f"];
 
+  if (loading)
+    return (
+      <div
+        className={`flex justify-center items-center min-h-screen ${
+          isDark ? "bg-[#0B0F1A]" : "bg-gray-100"
+        }`}
+      >
+        <Spin size="large" />
+      </div>
+    );
   return (
     <>
       <Navbar user={user} />

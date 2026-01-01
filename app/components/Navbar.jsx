@@ -27,7 +27,7 @@ export default function Navbar({ user }) {
 
   /* ---------------- NAV ITEMS ---------------- */
 
-  const NAV_ITEMS = [
+  const LOGGED_IN_NAV_ITEMS = [
     {
       label: "Trends",
       href: "/trends",
@@ -54,6 +54,7 @@ export default function Navbar({ user }) {
       icon: Bell,
     },
   ];
+  const GUEST_NAV_ITEMS = [];
 
   // Fetch notifications
   useEffect(() => {
@@ -89,7 +90,7 @@ export default function Navbar({ user }) {
 
           {/* Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
-            {NAV_ITEMS.map((item) => (
+            {(user ? LOGGED_IN_NAV_ITEMS : GUEST_NAV_ITEMS).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
