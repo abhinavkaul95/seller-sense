@@ -1,10 +1,9 @@
+import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
 export default defineConfig({
+  engine: "classic",
   datasource: {
-    db: {
-      provider: "sqlite",
-      adapter: "file:./dev.db",
-    },
+    url: process.env.DATABASE_URL!,
   },
 });
