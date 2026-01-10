@@ -18,6 +18,7 @@ import {
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Logo from "./Logo";
 
 export default function Navbar({ user }) {
   const { resolvedTheme, setTheme } = useTheme();
@@ -80,11 +81,7 @@ export default function Navbar({ user }) {
           {/* Brand */}
           <div className="flex items-center gap-3">
             <Link href="/">
-              <img
-                style={{ width: 250, marginTop: 15 }}
-                src="/logo.png"
-                alt="logo"
-              />
+              <Logo />
             </Link>
           </div>
 
